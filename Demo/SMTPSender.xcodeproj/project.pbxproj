@@ -18,6 +18,7 @@
 		AA2C47D2133101AC008FDE01 /* HSK_CFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2C47CD133101AC008FDE01 /* HSK_CFUtilities.m */; };
 		AA2C47D3133101AC008FDE01 /* NSStream+SKPSMTPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2C47CF133101AC008FDE01 /* NSStream+SKPSMTPExtensions.m */; };
 		AA2C47D4133101AC008FDE01 /* SKPSMTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2C47D1133101AC008FDE01 /* SKPSMTPMessage.m */; };
+		CC2469091BF08E9200234560 /* EmailSender.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2469081BF08E9200234560 /* EmailSender.m */; settings = {ASSET_TAGS = (); }; };
 		CC6664C81BA033A800BD7B21 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC6664C71BA033A800BD7B21 /* Default-568h@2x.png */; };
 		F1A6ABD80EB6E95300BA50E8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A6ABD70EB6E95300BA50E8 /* CFNetwork.framework */; };
 		F1A6ACC90EB7B2B300BA50E8 /* test.vcf in Resources */ = {isa = PBXBuildFile; fileRef = F1A6ACC80EB7B2B300BA50E8 /* test.vcf */; };
@@ -44,6 +45,8 @@
 		AA2C47CF133101AC008FDE01 /* NSStream+SKPSMTPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSStream+SKPSMTPExtensions.m"; path = "../SMTPLibrary/NSStream+SKPSMTPExtensions.m"; sourceTree = SOURCE_ROOT; };
 		AA2C47D0133101AC008FDE01 /* SKPSMTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SKPSMTPMessage.h; path = ../SMTPLibrary/SKPSMTPMessage.h; sourceTree = SOURCE_ROOT; };
 		AA2C47D1133101AC008FDE01 /* SKPSMTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SKPSMTPMessage.m; path = ../SMTPLibrary/SKPSMTPMessage.m; sourceTree = SOURCE_ROOT; };
+		CC2469071BF08E9200234560 /* EmailSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailSender.h; path = ../../SMTPLibrary/EmailSender.h; sourceTree = "<group>"; };
+		CC2469081BF08E9200234560 /* EmailSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailSender.m; path = ../../SMTPLibrary/EmailSender.m; sourceTree = "<group>"; };
 		CC6664C71BA033A800BD7B21 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F1A6ABD70EB6E95300BA50E8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F1A6ACC80EB7B2B300BA50E8 /* test.vcf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.vcf; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 		F1123CAD0EB8F89100DED5A8 /* Email (refresh from Handshake!) */ = {
 			isa = PBXGroup;
 			children = (
+				CC2469071BF08E9200234560 /* EmailSender.h */,
+				CC2469081BF08E9200234560 /* EmailSender.m */,
 				AA2C47C613310184008FDE01 /* Base64Transcoder.h */,
 				AA2C47C713310184008FDE01 /* Base64Transcoder.m */,
 				AA2C47C813310184008FDE01 /* NSData+Base64Additions.h */,
@@ -212,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				CC2469091BF08E9200234560 /* EmailSender.m in Sources */,
 				1D3623260D0F684500981E51 /* SMTPSenderAppDelegate.m in Sources */,
 				AA2C47CA13310184008FDE01 /* Base64Transcoder.m in Sources */,
 				AA2C47CB13310184008FDE01 /* NSData+Base64Additions.m in Sources */,

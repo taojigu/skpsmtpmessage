@@ -31,22 +31,24 @@
 #import "SMTPSenderAppDelegate.h"
 #import "SKPSMTPMessage.h"
 #import "NSData+Base64Additions.h"
+#import "EmailSender.h"
+
+
+
 
 @implementation SMTPSenderAppDelegate
 
 
 
 + (void)initialize {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *defaultsDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"monica@friends.com", @"fromEmail",
-                                               @"rachel@friends.com", @"toEmail",
-                                               @"smtp.qiye.163.com", @"relayHost",
-                                               @"monica@friends.com", @"login",
-                                               @"123456", @"pass",
-                                               [NSNumber numberWithBool:YES], @"requiresAuth",
-                                               [NSNumber numberWithBool:YES], @"wantsSecure", nil];
     
-    [userDefaults registerDefaults:defaultsDictionary];
+    
+    [EmailSender sharedSender].senderEmail = @"taojigu@163.com";
+    [EmailSender sharedSender].relayHost = @"smtp.163.com";
+    [EmailSender sharedSender].senderPassword = @"******";
+    
+    //[self initParameter2UserDefaults];
+    
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
@@ -81,7 +83,35 @@
 }
 
 - (IBAction)sendMessage:(id)sender {
+    
+    [[EmailSender sharedSender] sendEmail:@"taojigu@163.com" text:@"This is a sender test"];
+    return;
+    
+}
+- (void)messageSent:(SKPSMTPMessage *)message
+{
 
+    
+    self.textView.text  = @"Yay! Message was sent!";
+    //NSLog(@"delegate - message sent");
+}
+
+- (void)messageFailed:(SKPSMTPMessage *)message error:(NSError *)error
+{
+    
+    //self.textView.text = [NSString stringWithFormat:@"Darn! Error: %@, %@", [error code], [error localizedDescription]];\
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+            self.textView.text = [NSString stringWithFormat:@"Darn! Error!\n%li: %@\n%@", [error code], [error localizedDescription], [error localizedRecoverySuggestion]];
+    });
+    
+
+}
+
+-(void)sendEmailWithUserDefaultParameter
+{
+    
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     SKPSMTPMessage *testMsg = [[SKPSMTPMessage alloc] init];
@@ -97,11 +127,11 @@
         testMsg.login = [defaults objectForKey:@"login"];
         
         testMsg.pass = [defaults objectForKey:@"pass"];
-
+        
     }
     
     testMsg.wantsSecure = [[defaults objectForKey:@"wantsSecure"] boolValue]; // smtp.gmail.com doesn't work without TLS!
-
+    
     
     testMsg.subject = @"SMTPMessage Test Message";
     //testMsg.bccEmail = @"testbcc@test.com";
@@ -124,23 +154,18 @@
         [testMsg send];
     });
 }
-- (void)messageSent:(SKPSMTPMessage *)message
++(void)initParameter2UserDefaults
 {
-
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *defaultsDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"monica@friends.com", @"fromEmail",
+                                               @"rachel@friends.com", @"toEmail",
+                                               @"smtp.qiye.163.com", @"relayHost",
+                                               @"monica@friends.com", @"login",
+                                               @"123456", @"pass",
+                                               [NSNumber numberWithBool:YES], @"requiresAuth",
+                                               [NSNumber numberWithBool:YES], @"wantsSecure", nil];
     
-    self.textView.text  = @"Yay! Message was sent!";
-    //NSLog(@"delegate - message sent");
-}
-
-- (void)messageFailed:(SKPSMTPMessage *)message error:(NSError *)error
-{
-    
-    //self.textView.text = [NSString stringWithFormat:@"Darn! Error: %@, %@", [error code], [error localizedDescription]];\
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-            self.textView.text = [NSString stringWithFormat:@"Darn! Error!\n%li: %@\n%@", [error code], [error localizedDescription], [error localizedRecoverySuggestion]];
-    });
-    
+    [userDefaults registerDefaults:defaultsDictionary];
 
 }
 
